@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/navigation/AppNavHost.kt
 package com.example.machteacher.navigation
 
 import androidx.compose.runtime.Composable
@@ -24,9 +23,9 @@ import com.example.machteacher.ui.sessions.MentorDetailsScreen
 import com.example.machteacher.ui.sessions.SessionDetailScreen
 import com.example.machteacher.ui.sessions.SessionsScreen
 import com.example.machteacher.ui.sos.SosListScreen
-import com.example.machteacher.ui.chat.QrScannerScreen   // 👈 IMPORT QR
+import com.example.machteacher.ui.chat.QrScannerScreen
 
-// 🔥 IMPORTS PARA NOTIFICACIÓN DE MENSAJES
+
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -141,7 +140,7 @@ fun AppNavHost(
             )
         }
 
-        // 👇 CONVERSACIÓN + QR RESULT
+
         composable(
             route = Routes.Conversation.route,
             arguments = listOf(
@@ -156,12 +155,12 @@ fun AppNavHost(
 
             val vm: MessagesViewModel = hiltViewModel()
 
-            // 👇 LEE RESULTADO DEL QR
+
             val qrResult by entry.savedStateHandle
                 .getStateFlow<String?>("qr_result", null)
                 .collectAsState(initial = null)
 
-            // 👇 Limpia después de usar
+
             LaunchedEffect(qrResult) {
                 if (qrResult != null) entry.savedStateHandle["qr_result"] = null
             }
@@ -177,7 +176,7 @@ fun AppNavHost(
                 onQrClick = {
                     navController.navigate("qrScanner")
                 },
-                qrResult = qrResult  // 👈 PASAMOS EL TEXTO AL CHAT
+                qrResult = qrResult
             )
         }
 
@@ -290,7 +289,7 @@ fun AppNavHost(
             )
         }
 
-        // 🆕 PANTALLA QR
+
         composable("qrScanner") {
             QrScannerScreen(
                 onBack = { navController.popBackStack() },

@@ -17,10 +17,10 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun login(body: LoginRequest): AuthResponse {
         val response = api.login(body)
 
-        // 🔹 Guardamos token, id y rol
+
         dataStore.saveToken(response.token)
         dataStore.saveUserId(response.id)
-        dataStore.saveUserRole(response.role)   // << IMPORTANTE
+        dataStore.saveUserRole(response.role)
 
         return response
     }
@@ -28,10 +28,10 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun register(body: RegisterRequest): AuthResponse {
         val response = api.register(body)
 
-        // 🔹 Guardamos token, id y rol también al registrarse
+
         dataStore.saveToken(response.token)
         dataStore.saveUserId(response.id)
-        dataStore.saveUserRole(response.role)   // << IMPORTANTE
+        dataStore.saveUserRole(response.role)
 
         return response
     }

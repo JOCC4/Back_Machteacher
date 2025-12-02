@@ -1,11 +1,10 @@
-// app/src/main/java/com/example/machteacher/di/NetworkModule.kt
 package com.example.machteacher.di
 
 import com.example.machteacher.api.AuthApi
 import com.example.machteacher.api.MessagingApi
 import com.example.machteacher.api.ProfileApi
 import com.example.machteacher.api.SessionApi
-import com.example.machteacher.api.SosApi      // 👈 IMPORT NUEVO
+import com.example.machteacher.api.SosApi
 import com.example.machteacher.api.CatalogApi
 import dagger.Module
 import dagger.Provides
@@ -80,7 +79,7 @@ object NetworkModule {
     fun provideMessagingApi(retrofit: Retrofit): MessagingApi =
         retrofit.create(MessagingApi::class.java)
 
-    // 🚨 NUEVO: SosApi
+
     @Provides
     @Singleton
     fun provideSosApi(retrofit: Retrofit): SosApi =

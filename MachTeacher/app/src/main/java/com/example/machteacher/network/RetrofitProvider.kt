@@ -9,17 +9,17 @@ import java.util.concurrent.TimeUnit
 object RetrofitProvider {
     fun provide(baseUrl: String): Retrofit {
         val log = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY  // solo en dev
+            level = HttpLoggingInterceptor.Level.BODY
         }
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(log)                 // ← logging
+            .addInterceptor(log)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .build()
 
-        // IMPORTANTE: baseUrl debe terminar en "/"
+
         require(baseUrl.endsWith("/")) { "baseUrl must end with '/'" }
 
         return Retrofit.Builder()

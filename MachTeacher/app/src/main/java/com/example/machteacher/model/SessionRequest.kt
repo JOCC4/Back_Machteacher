@@ -1,15 +1,14 @@
-// app/src/main/java/com/example/machteacher/model/SessionRequest.kt
 package com.example.machteacher.model
 
 data class SessionRequest(
     val mentorId: Long,
-    val studentId: Long?,        // el backend lo ignora y toma del token; puedes enviar null
+    val studentId: Long?,
     val subjectId: Long,
-    val packageTypeId: Long?,    // null si sesión individual
-    val date: String,            // "yyyy-MM-dd"
-    val startTime: String,       // "HH:mm"
-    val durationMinutes: Int,    // 60, 90, 120...
-    val modality: String,        // "ONLINE" | "PRESENCIAL"
-    val notes: String?,          // null si vacío
+    val packageTypeId: Long?,
+    val date: String,
+    val startTime: String,
+    val durationMinutes: Int,
+    val modality: String,
+    val notes: String?,
     val priceUsd: Double
 )

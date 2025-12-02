@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -29,24 +33,25 @@ public class AuthController {
         private final UserRepository userRepo;
         private final JwtUtil jwt;
 
-        
         private final AvailabilitySlotRepository availabilitySlotRepository;
 
         // ---------- REGISTER ----------
         @PostMapping("/register")
         public AuthResponse register(@RequestBody RegisterRequest req) {
-                
-                if (userRepo.existsByEmail(req.getEmail())) {
-                        throw new IllegalArgumentException("Email already registered");
-                }
 
                 
+                if (userRepo.existsByEmail(req.getEmail())) {
+                        
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "EMAIL_EXISTS");
+                }
+
                 Role role = Role.STUDENT;
                 if (req.getRole() != null && !req.getRole().isBlank()) {
                         role = Role.valueOf(req.getRole().toUpperCase());
                 }
 
-                
                 User u = new User();
                 u.setFullName(req.getFullName());
                 u.setEmail(req.getEmail());
@@ -57,12 +62,10 @@ public class AuthController {
                 u.setCity(req.getCity());
                 u.setCountry(req.getCountry());
 
-                
                 u.setUniversity(req.getUniversity());
                 u.setCareer(req.getCareer());
                 u.setSemester(req.getSemester());
 
-                
                 u.setBio(req.getBio());
                 u.setSubjects(req.getSubjects());
                 u.setHourlyRate(req.getHourlyRate());
@@ -72,9 +75,8 @@ public class AuthController {
 
                 u = userRepo.save(u);
 
-                
                 if (u.getRole() == Role.MENTOR) {
-                        for (int dow = 1; dow <= 5; dow++) { 
+                        for (int dow = 1; dow <= 5; dow++) {
                                 AvailabilitySlot slot = new AvailabilitySlot();
                                 slot.setMentor(u);
                                 slot.setDayOfWeek(dow);
@@ -86,12 +88,10 @@ public class AuthController {
                         }
                 }
 
-                
                 String token = jwt.generateToken(
                                 u.getEmail(),
                                 Map.of("uid", u.getId(), "role", u.getRole().name()));
 
-                
                 AuthResponse res = new AuthResponse();
                 res.setToken(token);
                 res.setId(u.getId());

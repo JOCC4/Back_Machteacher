@@ -10,7 +10,7 @@ data class MentorUi(
     val hourlyRate: String
 )
 
-/** Convierte un [ProfileDto] de la capa de datos a un [MentorUi] para la UI. */
+
 fun ProfileDto.toMentorUi(): MentorUi {
     return MentorUi(
         id = this.id,

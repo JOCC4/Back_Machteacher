@@ -5,8 +5,10 @@ import MachTeacher.MachTeacher.model.Role;
 import MachTeacher.MachTeacher.model.User;
 import MachTeacher.MachTeacher.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,6 +19,14 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User create(User user) {
+
+        
+        if (user.getEmail() != null &&
+                userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "EMAIL_EXISTS");
+        }
 
         return userRepository.save(user);
     }
@@ -38,6 +48,7 @@ public class UserService {
             u.setFullName(data.getFullName());
         }
         if (data.getEmail() != null && !data.getEmail().isBlank()) {
+        
             u.setEmail(data.getEmail());
         }
         if (data.getPassword() != null && !data.getPassword().isBlank()) {
@@ -47,7 +58,6 @@ public class UserService {
             u.setRole(data.getRole());
         }
 
-        
         if (data.getUniversity() != null) {
             u.setUniversity(data.getUniversity());
         }
@@ -68,7 +78,6 @@ public class UserService {
     public User getByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }
-
 
     public User buildUserFrom(RegisterRequest req, String encodedPassword) {
         return User.builder()

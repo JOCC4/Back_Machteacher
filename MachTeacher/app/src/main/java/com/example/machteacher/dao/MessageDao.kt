@@ -3,7 +3,6 @@ package com.example.machteacher.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.example.machteacher.entity.MessageEntity
 import kotlinx.coroutines.flow.Flow
 

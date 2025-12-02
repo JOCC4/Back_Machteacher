@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/profile/ProfileScreen.kt
 package com.example.machteacher.ui.profile
 
 import androidx.compose.foundation.BorderStroke
@@ -24,7 +23,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,25 +36,25 @@ private enum class ProfileTab { Perfil, Notificaciones, Seguridad }
 /* ============ Pantalla (conectada al ViewModel) ============ */
 @Composable
 fun ProfileScreen(
-    userId: Long,                 // <-- Long obligatorio
-    role: String,                 // <-- "STUDENT" | "MENTOR"
+    userId: Long,
+    role: String,
     onLogout: () -> Unit = {},
     vm: ProfileViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsState()
     val view = LocalView.current
 
-    // calcula el "type" que espera el endpoint
+
     val type = remember(role) {
         if (role.equals("MENTOR", ignoreCase = true)) "mentor" else "student"
     }
 
-    // Disparar la carga al entrar (o si cambian userId / type)
+
     LaunchedEffect(userId, type) {
         vm.load(role = role, userId = userId)
     }
 
-    // Loading
+
     if (state.loading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
@@ -64,7 +62,7 @@ fun ProfileScreen(
         return
     }
 
-    // Error
+
     state.error?.let { err ->
         Column(Modifier.fillMaxSize().padding(16.dp)) {
             Text("No se pudo cargar el perfil", color = MaterialTheme.colorScheme.error)
@@ -76,7 +74,7 @@ fun ProfileScreen(
         return
     }
 
-    // Datos cargados (o vacíos si vienen nulos)
+
     val profile: ProfileUi = state.data ?: ProfileUi()
 
     var tab by rememberSaveable { mutableStateOf(ProfileTab.Perfil) }
@@ -134,7 +132,6 @@ fun ProfileScreen(
         when (tab) {
             ProfileTab.Perfil -> PerfilTab(
                 u = profile,
-                // ⚡ Conectado al VM: guarda aboutMe (mentor) o bio (student)
                 onBioSubmit = { draft ->
                     vm.updateBio(role = role, userId = userId, newBio = draft ?: "")
                 }
@@ -151,17 +148,18 @@ fun ProfileScreen(
 @Composable
 private fun PerfilTab(
     u: ProfileUi,
-    onBioSubmit: (String?) -> Unit = {} // callback para guardar
+    onBioSubmit: (String?) -> Unit = {}
 ) {
-    // Mostrar aboutMe si existe; si no, bio
+
     val aboutOrBio = remember(u.aboutMe, u.bio) { u.aboutMe ?: u.bio }
 
-    // Estado del diálogo de edición
+
     var showBioDialog by remember { mutableStateOf(false) }
     var bioDraft by rememberSaveable(aboutOrBio) { mutableStateOf(aboutOrBio.orEmpty()) }
 
     SectionCard {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+
             // Avatar
             Surface(shape = CircleShape, color = AppColors.AvatarBg) {
                 Box(Modifier.size(64.dp), contentAlignment = Alignment.Center) {
@@ -187,7 +185,7 @@ private fun PerfilTab(
                     BadgePill(u.role ?: "—")
                 }
             }
-            // ✏️ Botón de edición -> abre diálogo para editar bio
+
             IconButton(onClick = {
                 bioDraft = aboutOrBio.orEmpty()
                 showBioDialog = true
@@ -197,7 +195,7 @@ private fun PerfilTab(
         }
     }
 
-    // Diálogo para editar la bio (con botón Guardar)
+
     if (showBioDialog) {
         AlertDialog(
             onDismissRequest = { showBioDialog = false },
@@ -212,7 +210,7 @@ private fun PerfilTab(
             },
             confirmButton = {
                 TextButton(onClick = {
-                    onBioSubmit(bioDraft.ifBlank { null }) // ← GUARDA
+                    onBioSubmit(bioDraft.ifBlank { null })
                     showBioDialog = false
                 }) { Text("Guardar") }
             },

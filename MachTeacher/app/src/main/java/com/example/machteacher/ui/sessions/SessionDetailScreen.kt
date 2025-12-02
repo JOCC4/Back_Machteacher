@@ -198,7 +198,7 @@ fun SessionDetailScreen(
 
                             Spacer(Modifier.height(12.dp))
 
-                            // Nota amarilla con ícono (como el mockup)
+
                             Surface(
                                 color = NoteBg,
                                 shape = RoundedCornerShape(10.dp),
@@ -224,7 +224,7 @@ fun SessionDetailScreen(
 
                             Spacer(Modifier.height(12.dp))
 
-                            // Botón deshabilitado "Sesión no ha iniciado"
+
                             Button(
                                 onClick = { },
                                 enabled = false,

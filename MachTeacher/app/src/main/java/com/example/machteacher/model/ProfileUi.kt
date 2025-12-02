@@ -12,9 +12,9 @@ data class ProfileUi(
     val location: String? = null,
     val role: String? = null,
 
-    // mentor (opcionales)
+
     val subjects: List<String>? = null,
-    val hourlyRate: String? = null,              // en tu DTO es String?
+    val hourlyRate: String? = null,
     val teachingExperience: String? = null,
     val aboutMe: String? = null,
     val references: String? = null

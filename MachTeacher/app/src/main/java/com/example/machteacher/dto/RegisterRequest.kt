@@ -1,12 +1,11 @@
 package com.example.machteacher.dto
 
 data class RegisterRequest(
-    // básicos
+
     val fullName: String,
     val email: String,
     val password: String,
-    val role: String?,            // "MENTOR" | "STUDENT" (si null, backend usa STUDENT)
-    // contacto
+    val role: String?,
     val phone: String? = null,
     val city: String? = null,
     val country: String? = null,
@@ -16,8 +15,8 @@ data class RegisterRequest(
     val semester: String? = null,
     // mentor
     val bio: String? = null,
-    val subjects: String? = null,           // "Mate,Física"
-    val hourlyRate: String? = null,         // String en MVP
+    val subjects: String? = null,
+    val hourlyRate: String? = null,
     val teachingExperience: String? = null,
     val aboutMe: String? = null,
     val references: String? = null

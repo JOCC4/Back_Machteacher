@@ -21,7 +21,7 @@ fun RegistrationScreenWrapper(
 
     LaunchedEffect(state.error) { state.error?.let { snackbarHostState.showSnackbar(it) } }
 
-    // Al terminar el registro (STUDENT o MENTOR) → Login
+
     LaunchedEffect(state.done) {
         if (state.done) {
             navController.navigate(Routes.Login.build(showSuccessMessage = true)) {

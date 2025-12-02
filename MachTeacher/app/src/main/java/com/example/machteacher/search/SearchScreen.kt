@@ -21,14 +21,14 @@ fun SearchScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    // Helper: normaliza texto (quita tildes y pasa a minúsculas)
+
     fun String.normalize(): String =
         Normalizer.normalize(this, Normalizer.Form.NFD)
-            .replace("\\p{Mn}+".toRegex(), "") // quita diacríticos
+            .replace("\\p{Mn}+".toRegex(), "")
             .lowercase()
             .trim()
 
-    // ✅ Filtra por nombre O materia
+
     val filteredResults = remember(state.query, state.results) {
         val q = state.query.orEmpty().normalize()
         if (q.isBlank()) {
@@ -60,7 +60,7 @@ fun SearchScreen(
         Spacer(Modifier.height(12.dp))
 
         Button(
-            onClick = { viewModel.searchMentors() }, // si tu backend soporta ?q=, lo puedes usar allí
+            onClick = { viewModel.searchMentors() },
             modifier = Modifier.fillMaxWidth()
         ) { Text("Buscar") }
 
@@ -78,14 +78,13 @@ fun SearchScreen(
             } else {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     items(filteredResults) { mentor ->
-                        // Los campos en MentorUi ahora son seguros (non-null)
-                        // y `subjects` es una lista que convertimos a String para mostrarla.
+
                         MentorRow(
                             name = mentor.name,
-                            career = mentor.degree, // Usamos 'degree' del nuevo MentorUi
+                            career = mentor.degree,
                             subjects = mentor.subjects.joinToString(", "),
-                            hourly = mentor.pricePerHour, // Usamos 'pricePerHour' del nuevo MentorUi
-                            enabled = true, // El ID ahora está garantizado que existe
+                            hourly = mentor.pricePerHour,
+                            enabled = true,
                             onClick = {
                                 navController.navigate("booking/${mentor.id}")
                             }

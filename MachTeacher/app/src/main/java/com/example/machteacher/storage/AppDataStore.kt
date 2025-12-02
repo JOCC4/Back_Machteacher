@@ -22,7 +22,7 @@ class AppDataStore @Inject constructor(
     private val USER_ID = longPreferencesKey("user_id")
     private val USER_ROLE = stringPreferencesKey("user_role")
 
-    // ⬇️ NUEVO: ID del último SOS aceptado que ya mostró popup
+
     private val LAST_SOS_ACCEPTED = longPreferencesKey("last_sos_accepted_id")
 
     // ---------------- TOKEN ----------------
@@ -73,7 +73,7 @@ class AppDataStore @Inject constructor(
         }
     }
 
-    // ---------------- SOS ID (NUEVO!) ----------------
+    // ---------------- SOS ID ----------------
     suspend fun saveLastAcceptedSos(id: Long) {
         context.dataStore.edit { prefs ->
             prefs[LAST_SOS_ACCEPTED] = id

@@ -30,7 +30,7 @@ fun SessionItem(session: Session, modifier: Modifier = Modifier) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = session.subject, // <-- Cambio aquí
+                text = session.subject,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )

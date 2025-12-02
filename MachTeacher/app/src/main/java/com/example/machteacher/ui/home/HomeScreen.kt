@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/home/HomeScreen.kt
 package com.example.machteacher.ui.home
 
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -152,12 +151,12 @@ fun HomeScreen(
             }
         }
 
-        // 🎉 Confeti cuando la ayuda es aceptada
+
         ConfettiOverlay(
             isActive = sosState.showAcceptedPopup
         )
 
-        // 📌 Popups SOS alumno (una sola vez por evento, hasta que el VM limpie el estado)
+
         when {
             sosState.showAcceptedPopup && sosState.acceptedByName != null -> {
                 AlertDialog(
@@ -230,7 +229,7 @@ private fun HomeScreenContent(
         label = "sosGlowRotation"
     )
 
-    // Órbitas C3: dos luces en sentidos opuestos
+
     val orbitAngle1 by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
@@ -254,7 +253,7 @@ private fun HomeScreenContent(
     val shouldGlow = isMentor && mentorHasPendingSos
     val scale = if (shouldGlow) animatedScale else 1f
 
-    // Color neón basado en tu UI
+
     val neonColor = Color(0xFFC498EC)
 
     Column(
@@ -315,7 +314,7 @@ private fun HomeScreenContent(
                         )
                     ) {
                         if (shouldGlow) {
-                            // Halo neón girando
+
                             Box(
                                 modifier = Modifier
                                     .matchParentSize()
@@ -337,7 +336,7 @@ private fun HomeScreenContent(
                                     )
                             )
 
-                            // Órbitas con dos luces
+
                             Canvas(
                                 modifier = Modifier
                                     .matchParentSize()
@@ -346,7 +345,7 @@ private fun HomeScreenContent(
                                 val h = size.height
                                 val radius = min(w, h) / 2.2f
 
-                                // Luz 1
+
                                 val x1 = center.x + radius * cos(Math.toRadians(orbitAngle1.toDouble())).toFloat()
                                 val y1 = center.y + radius * sin(Math.toRadians(orbitAngle1.toDouble())).toFloat()
                                 drawCircle(
@@ -355,7 +354,7 @@ private fun HomeScreenContent(
                                     center = Offset(x1, y1)
                                 )
 
-                                // Luz 2 (lado opuesto)
+
                                 val x2 = center.x + radius * cos(Math.toRadians(orbitAngle2.toDouble())).toFloat()
                                 val y2 = center.y + radius * sin(Math.toRadians(orbitAngle2.toDouble())).toFloat()
                                 drawCircle(
@@ -364,7 +363,7 @@ private fun HomeScreenContent(
                                     center = Offset(x2, y2)
                                 )
 
-                                // Borde neón suave
+
                                 drawRoundRect(
                                     color = neonColor.copy(alpha = 0.6f),
                                     topLeft = Offset(6f, 6f),
@@ -646,7 +645,7 @@ private fun Pill(text: String) {
     }
 }
 
-/* 🎉 Confeti dibujado a mano, sin Lottie */
+
 @Composable
 private fun ConfettiOverlay(isActive: Boolean) {
     var show by remember { mutableStateOf(false) }
@@ -654,7 +653,7 @@ private fun ConfettiOverlay(isActive: Boolean) {
     LaunchedEffect(isActive) {
         if (isActive) {
             show = true
-            delay(1600)   // dura ~1.6s
+            delay(1600)
             show = false
         } else {
             show = false

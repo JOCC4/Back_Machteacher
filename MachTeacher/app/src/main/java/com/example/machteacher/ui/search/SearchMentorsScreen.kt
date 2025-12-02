@@ -99,10 +99,10 @@ fun SearchMentorsScreen(
 
     // ===== Estado =====
     val state by viewModel.state.collectAsState()
-    // Lista de mentores que viene del estado (results en tu VM)
+
     val mentors = state.results
 
-    // Tipo explícito para evitar inferencia
+
     val filtered: List<MentorUi> = remember(state.query, mentors) {
         val q = state.query.orEmpty()
         if (q.isBlank()) mentors
@@ -138,7 +138,7 @@ fun SearchMentorsScreen(
         )
         Spacer(Modifier.height(10.dp))
 
-        // Search bar (usa String, no String?)
+
         OutlinedTextField(
             value = state.query.orEmpty(),
             onValueChange = { viewModel.onQueryChanged(it) },
@@ -160,7 +160,7 @@ fun SearchMentorsScreen(
 
         Spacer(Modifier.height(8.dp))
 
-        // Filtros + SOS
+
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Box {
                 OutlinedButton(

@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/chat/MessagesScreen.kt
 package com.example.machteacher.ui.chat
 
 import androidx.compose.foundation.background
@@ -29,17 +28,17 @@ fun MessagesScreen(
     onOpenChat: (Long, String) -> Unit,
     viewModel: MessagesViewModel,
 
-    // 🔥 callback hacia AppNavHost → AppRoot
+
     onUnreadMessagesChanged: (Int) -> Unit
 ) {
     val state by viewModel.state.collectAsState()
 
-    // 🔥 Actualizar el BottomBar cuando cambian los no leídos
+
     LaunchedEffect(state.totalUnread) {
         onUnreadMessagesChanged(state.totalUnread)
     }
 
-    // 🔥 Primero cargar sesiones y luego iniciar el listener de mensajes
+
     LaunchedEffect(userId) {
         if (userId != 0L) {
             viewModel.loadFromSessions()
@@ -105,7 +104,7 @@ fun MessagesScreen(
                     ConversationRow(
                         item = conv,
                         onClick = {
-                            // ⚠️ NO limpiar unread aquí
+
                             onOpenChat(conv.id, conv.mentorName)
                         }
 
@@ -153,7 +152,7 @@ private fun ConversationRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            // Avatar simple
+
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -168,7 +167,7 @@ private fun ConversationRow(
                 )
             }
 
-            // 🔴 puntito rojo pequeño al lado del avatar
+
             if (item.unread > 0) {
                 Box(
                     modifier = Modifier
@@ -200,7 +199,7 @@ private fun ConversationRow(
                 )
             }
 
-            // Derecha
+
             Column(horizontalAlignment = Alignment.End) {
 
                 Text(

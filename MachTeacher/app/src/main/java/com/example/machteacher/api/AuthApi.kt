@@ -11,7 +11,7 @@ interface AuthApi {
     @POST("/api/auth/login")
     suspend fun login(@Body body: LoginRequest): AuthResponse
 
-    // REVERTIDO: Solo existe un endpoint de registro genérico
+
     @POST("/api/auth/register")
     suspend fun register(@Body req: RegisterRequest): AuthResponse
 }

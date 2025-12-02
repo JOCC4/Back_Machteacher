@@ -31,7 +31,7 @@ class RegistrationViewModel @Inject constructor(
     private val _state = MutableStateFlow(RegistrationState())
     val state: StateFlow<RegistrationState> = _state
 
-    // --- REGISTRO DE ESTUDIANTE (simple, una sola llamada) ---
+
     fun registerStudent(
         email: String, fullName: String, phone: String, city: String, country: String,
         password: String, university: String?, career: String?, semester: String?
@@ -75,10 +75,10 @@ class RegistrationViewModel @Inject constructor(
                 )
                 val authResponse = authRepo.register(registerReq)
 
-                // Si el registro falla, authRepo.register lanzará una excepción que se captura abajo
+
                 val newUserId = authResponse.id
 
-                //  Actualizar el perfil con los datos de mentor
+
                 val profileUpdateReq = ProfileDto(
                     id = newUserId,
                     subjects = subjects,
@@ -89,7 +89,7 @@ class RegistrationViewModel @Inject constructor(
                 )
                 profileRepo.updateMentorProfile(newUserId, profileUpdateReq)
 
-                // 3. Si todo va bien, marcamos como completado
+
                 _state.value = RegistrationState(done = true, result = authResponse)
 
             } catch (e: Exception) {

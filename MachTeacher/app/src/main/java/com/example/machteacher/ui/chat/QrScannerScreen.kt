@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/chat/QrScannerScreen.kt
 package com.example.machteacher.ui.chat
 
 import android.Manifest
@@ -17,7 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api   // 👈 NUEVO IMPORT
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -41,7 +40,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
-@OptIn(ExperimentalMaterial3Api::class)  // 👈 OPT-IN PARA TopAppBar / Scaffold
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QrScannerScreen(
     onBack: () -> Unit,
@@ -173,7 +172,7 @@ private fun QrCameraView(
                                 }
                             }
                             .addOnFailureListener {
-                                // Podrías loguear el error si quieres
+
                             }
                             .addOnCompleteListener {
                                 isProcessing = false
@@ -196,7 +195,7 @@ private fun QrCameraView(
                                 analysis
                             )
                         } catch (e: Exception) {
-                            // Log opcional
+
                         }
                     },
                     ContextCompat.getMainExecutor(ctx)

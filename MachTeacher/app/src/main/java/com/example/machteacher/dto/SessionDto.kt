@@ -1,4 +1,3 @@
-// com/example/machteacher/dto/SessionDto.kt
 package com.example.machteacher.dto
 
 data class SessionDto(
@@ -6,12 +5,12 @@ data class SessionDto(
     val studentId: Long,
     val mentorId: Long,
     val subjectId: Long,
-    val packageTypeId: Long?,   // puede venir null
-    val date: String,           // "2025-11-18"
-    val startTime: String,      // "12:00"
+    val packageTypeId: Long?,
+    val date: String,
+    val startTime: String,
     val durationMinutes: Int,
-    val modality: String,       // "ONLINE" / "PRESENCIAL"
-    val status: String,         // "SCHEDULED"
+    val modality: String,
+    val status: String,
     val priceUsd: Double,
-    val notes: String?          // puede ser null
+    val notes: String?
 )

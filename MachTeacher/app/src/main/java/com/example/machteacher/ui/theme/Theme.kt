@@ -12,11 +12,11 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.machteacher.ui.design.AppColors
 import com.example.machteacher.ui.design.AppTypography
 
-// 🎨 Esquema de colores claros y oscuros
+
 private val DarkColorScheme = darkColorScheme(
     primary = AppColors.PrimaryBlue,
     secondary = AppColors.SecondaryBlue,
-    background = AppColors.TextPrimary, // Usando el color unificado
+    background = AppColors.TextPrimary,
     onBackground = AppColors.BackgroundLight
 )
 
@@ -24,10 +24,10 @@ private val LightColorScheme = lightColorScheme(
     primary = AppColors.PrimaryBlue,
     secondary = AppColors.SecondaryBlue,
     background = AppColors.BackgroundLight,
-    onBackground = AppColors.TextPrimary // Usando el color unificado
+    onBackground = AppColors.TextPrimary
 )
 
-// 🌗 Tema principal de la app
+
 @Composable
 fun MachTeacherTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -46,7 +46,7 @@ fun MachTeacherTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = AppTypography, // Usando la tipografía unificada
+        typography = AppTypography,
         content = content
     )
 }

@@ -31,7 +31,7 @@ class ChatViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ChatUiState())
     val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
-    // 🔵 Llamado explícito desde ChatScreen
+
     fun notifyConversationOpened(convId: Long, userId: Long) {
         onConversationOpenedCallback?.invoke(convId, userId)
     }

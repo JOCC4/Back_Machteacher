@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/profile/ProfileViewModel.kt
 package com.example.machteacher.ui.profile
 
 import androidx.lifecycle.ViewModel
@@ -53,14 +52,14 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    /** Guarda SOLO about_me. */
+
     fun updateBio(role: String, userId: Long, newBio: String) {
         if (_state.value.loading) return
         _state.value = _state.value.copy(loading = true, error = null)
 
         val clean = newBio.trim()
 
-        // REVERTIDO: El constructor vuelve a ser simple
+
         val body = if (role.equals("MENTOR", true)) {
             ProfileDto(
                 id = userId,
@@ -95,7 +94,7 @@ class ProfileViewModel @Inject constructor(
     }
 
 
-    // Mapper DTO -> UI (mostramos aboutMe con prioridad)
+
     private fun ProfileDto.toUi(): ProfileUi =
         ProfileUi(
             name = name,
@@ -107,9 +106,7 @@ class ProfileViewModel @Inject constructor(
             semester = semester,
             location = location,
             role = role,
-            // REVERTIDO: Volvemos a usar split para procesar el String
             subjects = subjects?.split(",")?.map { it.trim() }?.filter { it.isNotEmpty() },
-            // REVERTIDO: hourlyRate ya es un String y se pasa directamente
             hourlyRate = hourlyRate,
             teachingExperience = teachingExperience,
             aboutMe = aboutMe,

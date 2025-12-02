@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/repository/SessionRepositoryImpl.kt
 package com.example.machteacher.repository
 
 import android.util.Log

@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/navigation/AppRoot.kt
 package com.example.machteacher.navigation
 
 import androidx.compose.foundation.Canvas

@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/booking/BookingViewModel.kt
 package com.example.machteacher.ui.booking
 
 import androidx.lifecycle.SavedStateHandle

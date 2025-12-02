@@ -1,6 +1,6 @@
 package com.example.machteacher.auth
 
-// RegistrationApi.kt
+
 import com.example.machteacher.dto.StudentRegisterRequest
 import retrofit2.Response
 import retrofit2.http.Body

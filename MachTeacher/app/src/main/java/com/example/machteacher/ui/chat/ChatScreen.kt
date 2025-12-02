@@ -35,14 +35,14 @@ fun ChatScreen(
     userId: Long,
     onBack: () -> Unit,
     onConversationOpened: (Long, Long) -> Unit,
-    onQrClick: () -> Unit, // callback para abrir el escáner QR
-    qrResult: String?,     // 👈 NUEVO: texto escaneado desde el QR
+    onQrClick: () -> Unit,
+    qrResult: String?,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
-    // Vibración ligera cuando llega un QR
+
     val vibrator = remember(context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val vm = context.getSystemService(VibratorManager::class.java)
@@ -55,10 +55,10 @@ fun ChatScreen(
 
     var highlightInput by remember { mutableStateOf(false) }
 
-    // Cuando llega un resultado de QR → rellenar input + vibrar + resaltar
+
     LaunchedEffect(qrResult) {
         if (!qrResult.isNullOrBlank()) {
-            // Rellenar el input con el contenido del QR
+
             viewModel.onInputChange(qrResult)
 
             // Activar highlight
@@ -160,7 +160,7 @@ fun ChatScreen(
                 onSend = { viewModel.sendCurrentMessage() },
                 enabled = !state.isSending,
                 onQrClick = onQrClick,
-                highlight = highlightInput   // 👈 pasa el highlight a la fila
+                highlight = highlightInput
             )
         }
     }
@@ -194,7 +194,7 @@ private fun ChatInputRow(
     onSend: () -> Unit,
     enabled: Boolean,
     onQrClick: () -> Unit,
-    highlight: Boolean // 👈 NUEVO: indica si debemos resaltar el input
+    highlight: Boolean
 ) {
     val canSend = enabled && text.isNotBlank()
 
@@ -229,9 +229,7 @@ private fun ChatInputRow(
 
             Spacer(Modifier.width(8.dp))
 
-            // 🔀 Opción profesional:
-            // Si no hay texto → botón QR
-            // Si hay texto → botón enviar
+
             if (text.isBlank()) {
                 IconButton(
                     onClick = onQrClick,

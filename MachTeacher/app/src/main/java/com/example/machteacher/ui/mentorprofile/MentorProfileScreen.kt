@@ -22,7 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.collectAsState
 import com.example.machteacher.ui.components.SubjectChips
 
-// REVERTIDO: Colores definidos localmente como antes
+
 private val BorderGray = Color(0xFFE6E6E6)
 private val TextPrimary = Color(0xFF1A1A1A)
 private val TextSecondary = Color(0xFF6B7280)
@@ -96,12 +96,12 @@ fun MentorProfileScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.Star, null, tint = Color(0xFFFFC107))
                         Spacer(Modifier.width(4.dp))
-                        // REVERTIDO: Se vuelve a usar el valor fijo
+
                         Text("4.9 (127)", color = TextPrimary)
                     }
                 }
                 Spacer(Modifier.height(8.dp))
-                // REVERTIDO: Se vuelve a usar el valor fijo
+
                 Text("Responde en < 1 hora", color = TextSecondary, fontSize = 12.sp)
                 Spacer(Modifier.height(8.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -135,7 +135,7 @@ fun MentorProfileScreen(
         ) {
             Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                     // REVERTIDO: hourlyRate ya es String
+
                     Text("$ ${profile?.hourlyRate ?: "—"} /hora", color = TextPrimary)
                     Text("Precio por sesión", color = TextSecondary, fontSize = 12.sp)
                 }
@@ -167,7 +167,7 @@ fun MentorProfileScreen(
 
         // Contenido por pestaña
         when (tab) {
-            0 -> { // Acerca
+            0 -> {
                 Surface(
                     shape = RoundedCornerShape(16.dp),
                     border = BorderStroke(1.dp, BorderGray),
@@ -181,7 +181,7 @@ fun MentorProfileScreen(
                         Text("Materias que enseña", fontWeight = FontWeight.Medium, color = TextPrimary)
                         Spacer(Modifier.height(6.dp))
 
-                        // REVERTIDO: Se vuelve a usar split para procesar el String
+
                         SubjectChips(
                             subjects = profile?.subjects
                                 ?.split(",")
@@ -193,7 +193,7 @@ fun MentorProfileScreen(
                     }
                 }
             }
-            1 -> { // REVERTIDO: Se vuelve a usar la lista de ejemplo
+            1 -> {
                 val reviews = listOf(
                     ReviewUi("Carlos Ruiz", "Programación", "Excelente tutora, muy paciente y clara en sus explicaciones.", "2 días atrás"),
                     ReviewUi("Ana López", "Algoritmos", "Me ayudó mucho con los algoritmos. Súper recomendada.", "1 semana atrás")
@@ -202,7 +202,7 @@ fun MentorProfileScreen(
                     reviews.forEach { ReviewItem(it) }
                 }
             }
-            2 -> { // REVERTIDO: Se vuelve a usar la lista de ejemplo
+            2 -> {
                 val schedule = listOf(
                     "Lunes" to listOf("14:00", "15:00", "16:00", "19:00"),
                     "Martes" to listOf("15:00", "16:00", "17:00"),

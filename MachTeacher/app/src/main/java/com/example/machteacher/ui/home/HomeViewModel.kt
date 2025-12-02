@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/home/HomeViewModel.kt
 package com.example.machteacher.ui.home
 
 import androidx.lifecycle.ViewModel
@@ -35,7 +34,7 @@ class HomeViewModel @Inject constructor(
     fun load(
         currentUserId: Long,
         role: String,
-        featuredIds: List<Long> = listOf(4L, 13L)
+        featuredIds: List<Long> = listOf(19L, 25L)
     ) {
         if (_state.value.loading) return
         _state.value = _state.value.copy(loading = true, error = null)
@@ -86,7 +85,7 @@ class HomeViewModel @Inject constructor(
 
                     val otherName: String = try {
                         if (normRole == "MENTOR") {
-                            // Soy mentor → muestro nombre del estudiante
+
                             val r = profileApi.getProfile("student", dto.studentId)
                             if (r.isSuccessful) {
                                 r.body()?.name ?: "Alumno ${dto.studentId}"
@@ -94,7 +93,7 @@ class HomeViewModel @Inject constructor(
                                 "Alumno ${dto.studentId}"
                             }
                         } else {
-                            // Soy estudiante → muestro nombre del mentor
+
                             val r = profileApi.getProfile("mentor", dto.mentorId)
                             if (r.isSuccessful) {
                                 r.body()?.name ?: "Mentor ${dto.mentorId}"
@@ -115,10 +114,10 @@ class HomeViewModel @Inject constructor(
                     )
                 }
 
-                // solo 2 próximas para el home
+
                 val sessionsLimited = allSessions.take(2)
 
-                // 4) Mentores destacados (igual que antes)
+
                 val featured = featuredIds.mapNotNull { id ->
                     try {
                         val r = profileApi.getProfile("mentor", id)

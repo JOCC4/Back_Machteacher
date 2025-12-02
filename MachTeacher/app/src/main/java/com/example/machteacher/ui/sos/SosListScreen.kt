@@ -24,12 +24,12 @@ fun SosListScreen(
     val vm: SosViewModel = hiltViewModel()
     val state by vm.state.collectAsState()
 
-    // 👉 Cargar SOS al entrar
+
     LaunchedEffect(Unit) {
         vm.loadActiveSosForMentor(mentorId)
     }
 
-    // 👉 POPUP luego de aceptar o mensajes generales
+
     if (state.successMessage != null) {
         AlertDialog(
             onDismissRequest = { vm.clearMessages() },

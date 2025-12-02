@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/sos/SosViewModel.kt
 package com.example.machteacher.ui.sos
 
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class SosUiState(
-    // 🎯 Alumno
+
     val isSending: Boolean = false,
     val successMessage: String? = null,
     val error: String? = null,
@@ -22,9 +21,9 @@ data class SosUiState(
     val acceptedByName: String? = null,
     val acceptedByEmail: String? = null,
     val hasPendingSos: Boolean = false,
-    val showAcceptedPopup: Boolean = false,   // controla directamente el popup
+    val showAcceptedPopup: Boolean = false,
 
-    // 🎯 Mentor (lista SOS)
+
     val isLoading: Boolean = false,
     val sosList: List<SosResponseDto> = emptyList()
 )
@@ -35,8 +34,7 @@ class SosViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        // 🧠 Se mantiene mientras el proceso de la app siga vivo
-        // y evita repetir el popup de aceptación para el mismo SOS
+
         private var globalLastHandledAcceptedSosId: Long? = null
     }
 
@@ -46,7 +44,7 @@ class SosViewModel @Inject constructor(
     private var lastCreatedSosId: Long? = null
     private var currentStudentId: Long? = null
 
-    /* 🚨 Alumno envía SOS */
+
     fun sendSosAsStudent(studentId: Long, subject: String, message: String) {
         viewModelScope.launch {
             _state.update {
@@ -70,14 +68,14 @@ class SosViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         isSending = false,
-                        // 👇 SOLO aquí mostramos el mensaje de “SOS enviado”
+
                         successMessage = "🚨 SOS enviado, espera un mentor disponible",
                         hasPendingSos = true,
                         showAcceptedPopup = false
                     )
                 }
 
-                // empezar a chequear si fue aceptado
+
                 checkIfAccepted()
 
             } catch (e: Exception) {
@@ -92,13 +90,13 @@ class SosViewModel @Inject constructor(
         }
     }
 
-    /* 🔍 Alumno: ver si ya aceptaron el SOS (polling mientras la app está viva) */
+
     private fun checkIfAccepted() {
         viewModelScope.launch {
             val sosId = lastCreatedSosId ?: return@launch
             val student = currentStudentId ?: return@launch
 
-            repeat(30) {   // ~2 minutos
+            repeat(30) {
                 delay(5000)
                 val list = sosRepository.getSosByStudent(student)
                 val mySos = list.firstOrNull { it.id == sosId }
@@ -106,7 +104,7 @@ class SosViewModel @Inject constructor(
                 if (mySos?.status == "ACCEPTED") {
                     val mentorName = mySos.acceptedBy?.fullName ?: "un mentor"
 
-                    // marcar este SOS como ya notificado (global)
+
                     globalLastHandledAcceptedSosId = mySos.id
 
                     _state.update {
@@ -115,7 +113,7 @@ class SosViewModel @Inject constructor(
                             acceptedByName = mentorName,
                             successMessage = null,
                             hasPendingSos = false,
-                            showAcceptedPopup = true   // dispara popup + confeti
+                            showAcceptedPopup = true
                         )
                     }
                     return@launch
@@ -124,13 +122,13 @@ class SosViewModel @Inject constructor(
         }
     }
 
-    /* 🔍 Alumno: cargar estado SOS al entrar al Home */
+
     fun loadStudentSos(studentId: Long) {
         viewModelScope.launch {
             try {
                 val list = sosRepository.getSosByStudent(studentId)
 
-                // 1) Buscar SOS aceptados NUEVOS (id mayor al último mostrado)
+
                 val newAccepted = list
                     .filter { it.status == "ACCEPTED" }
                     .filter { globalLastHandledAcceptedSosId == null || it.id > globalLastHandledAcceptedSosId!! }
@@ -145,13 +143,13 @@ class SosViewModel @Inject constructor(
                             acceptedByName = newAccepted.acceptedBy?.fullName ?: "un mentor",
                             successMessage = null,
                             hasPendingSos = false,
-                            showAcceptedPopup = true   // 👈 se muestra SOLO una vez por id
+                            showAcceptedPopup = true
                         )
                     }
                     return@launch
                 }
 
-                // 2) Si no hay nuevos aceptados, revisar si hay algún PENDING (último creado)
+
                 val latestPending = list
                     .filter { it.status == "PENDING" }
                     .maxByOrNull { it.id }
@@ -160,14 +158,12 @@ class SosViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             hasPendingSos = true,
-                            // ⛔ OJO: ya NO seteamos successMessage aquí,
-                            // así NO se repite el popup de “SOS enviado” al volver al Home
                             isAccepted = false,
                             showAcceptedPopup = false
                         )
                     }
                 } else {
-                    // 3) Sin SOS activos
+
                     _state.update {
                         it.copy(
                             hasPendingSos = false,
@@ -179,12 +175,12 @@ class SosViewModel @Inject constructor(
                 }
 
             } catch (_: Exception) {
-                // en esta carga inicial podemos ignorar el error silenciosamente
+
             }
         }
     }
 
-    /* 🧹 Limpiar mensajes/popup (NO resetea globalLastHandledAcceptedSosId) */
+
     fun clearMessages() {
         _state.update {
             it.copy(
@@ -198,7 +194,7 @@ class SosViewModel @Inject constructor(
         }
     }
 
-    /* 🧑‍🏫 Mentor: cargar lista de SOS activos */
+
     fun loadActiveSosForMentor(mentorId: Long) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
@@ -226,7 +222,7 @@ class SosViewModel @Inject constructor(
         }
     }
 
-    /* 🧑‍🏫 Mentor: aceptar un SOS de la lista */
+
     fun acceptSos(sosId: Long, mentorId: Long) {
         viewModelScope.launch {
             try {

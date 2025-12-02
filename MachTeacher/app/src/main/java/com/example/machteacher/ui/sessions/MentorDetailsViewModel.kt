@@ -72,10 +72,10 @@ class MentorDetailsViewModel @Inject constructor(
         if (_state.value.loading) return
         _state.value = _state.value.copy(loading = true, error = null, done = false)
 
-        // REVERTIDO: Volvemos a crear un String separado por comas
+
         val subjectsCsv = subjects.joinToString(",")
 
-        // REVERTIDO: El constructor vuelve a ser simple
+
         val updateBody = ProfileDto(
             id = userId,
             name = null,
@@ -133,9 +133,7 @@ class MentorDetailsViewModel @Inject constructor(
             semester = dto.semester,
             location = dto.location,
             role = dto.role,
-            // REVERTIDO: Volvemos a usar split
             subjects = dto.subjects?.split(",")?.map { it.trim() }?.filter { it.isNotEmpty() },
-            // REVERTIDO: hourlyRate ya es String
             hourlyRate = dto.hourlyRate,
             teachingExperience = dto.teachingExperience,
             aboutMe = dto.aboutMe,

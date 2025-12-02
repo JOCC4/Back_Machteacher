@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/common/RatingDialog.kt
 package com.example.machteacher.ui.common
 
 import androidx.compose.foundation.layout.Column

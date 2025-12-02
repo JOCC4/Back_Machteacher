@@ -21,7 +21,7 @@ class SearchViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        // Carga inicial de mentores al crear el ViewModel
+
         loadMentors(page = 0, size = 20)
     }
 
@@ -39,7 +39,6 @@ class SearchViewModel @Inject constructor(
             try {
                 val q = query?.takeIf { it.isNotBlank() }
                 val mentors = profileRepository.getMentors(page = page, size = size, query = q)
-                // Usamos mapNotNull para convertir y filtrar los nulos en un solo paso.
                 val mentorUis = mentors.mapNotNull { it.toMentorUi() }
                 _state.update { it.copy(isLoading = false, results = mentorUis) }
             } catch (e: Exception) {

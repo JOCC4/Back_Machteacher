@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/navigation/Routes.kt
 package com.example.machteacher.navigation
 
 import android.net.Uri
@@ -14,7 +13,7 @@ sealed class Routes(val route: String) {
     object Registration : Routes("registration")
     object Filters : Routes("filters")
 
-    // 🔴 NUEVO: lista de SOS para mentores
+
     object SosList : Routes("sos_list")
 
     // ===== PERFIL DEL MENTOR =====

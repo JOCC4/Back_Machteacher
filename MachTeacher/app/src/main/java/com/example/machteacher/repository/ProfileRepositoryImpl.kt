@@ -14,10 +14,6 @@ class ProfileRepositoryImpl @Inject constructor(
     private val catalogApi: CatalogApi
 ) : ProfileRepository {
 
-    // (Opcional) método extendido si tu API lo soporta
-    // suspend fun getMentorFull(mentorId: Long): MentorFull =
-    //     api.getMentorProfileFull(mentorId)
-
     // ---------- STUDENT ----------
     override suspend fun getStudentProfile(userId: Long): ProfileDto =
         try {
@@ -71,7 +67,7 @@ class ProfileRepositoryImpl @Inject constructor(
             throw e
         }
 
-    // ---------- CATÁLOGO (ID de materia por nombre) ----------
+    // ---------- CATÁLOGO ----------
     override suspend fun getSubjectIdByName(name: String): Long {
         val all = catalogApi.listSubjects()
         return all.firstOrNull { it.name.equals(name, ignoreCase = true) }

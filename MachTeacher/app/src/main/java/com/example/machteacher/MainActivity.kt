@@ -1,4 +1,3 @@
-// MainActivity.kt
 package com.example.machteacher
 
 import android.os.Bundle

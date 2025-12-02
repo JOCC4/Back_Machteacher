@@ -11,9 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-/**
- * ✅ Se usa para mostrar materias en forma de chips (solo lectura)
- */
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SubjectChips(

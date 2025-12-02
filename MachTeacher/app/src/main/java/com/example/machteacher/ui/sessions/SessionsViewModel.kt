@@ -25,10 +25,10 @@ class SessionsViewModel @Inject constructor(
             _state.update { it.copy(isLoading = true, error = null) }
 
             try {
-                // 1) Refresca desde el backend y guarda en Room
+
                 sessionRepository.refreshUpcomingSessions()
 
-                // 2) Escucha el Flow de Room y actualiza el estado
+
                 sessionRepository.getUpcomingSessions()
                     .collectLatest { sessions ->
                         _state.update {

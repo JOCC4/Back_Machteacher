@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface SessionDao {
 
-    // 🔹 Estudiante
+    // Estudiante
     @Query("SELECT * FROM sessions WHERE studentId = :studentId ORDER BY dateTime ASC")
     fun getAllSessions(studentId: Long): Flow<List<SessionEntity>>
 
-    // 🔹 Mentor (NECESARIO PARA QUE FUNCIONE)
+
     @Query("SELECT * FROM sessions WHERE mentorId = :mentorId ORDER BY dateTime ASC")
     fun getAllSessionsAsMentor(mentorId: Long): Flow<List<SessionEntity>>
 

@@ -23,10 +23,10 @@ fun MentorDetailsScreen(
 ) {
     val state by vm.state.collectAsState()
 
-    // Carga del perfil al entrar
+
     LaunchedEffect(userId) { vm.loadMentor(userId) }
 
-    // Estados del formulario (saveable para rotaciones / process death)
+    // Estados del formulario (saveable para rotaciones)
     var subjectsText by rememberSaveable { mutableStateOf("") }
     var hourlyRate   by rememberSaveable { mutableStateOf("") }
     var teachingExp  by rememberSaveable { mutableStateOf("") }
@@ -36,7 +36,7 @@ fun MentorDetailsScreen(
     var career       by rememberSaveable { mutableStateOf("") }
     var semester     by rememberSaveable { mutableStateOf("") }
 
-    // Prellenar una sola vez por campo (no pisar lo que ya se está editando)
+
     LaunchedEffect(state.profile) {
         state.profile?.let { p ->
             if (subjectsText.isBlank()) subjectsText = (p.subjects ?: emptyList()).joinToString(", ")
@@ -50,7 +50,7 @@ fun MentorDetailsScreen(
         }
     }
 
-    // Navegación al completar guardado
+
     LaunchedEffect(state.done) {
         if (state.done) onDone()
     }
@@ -124,7 +124,7 @@ fun MentorDetailsScreen(
                 vm.saveMentor(
                     userId = userId,
                     subjects = subjects,
-                    hourlyRate = hourlyRate.ifBlank { null }, // backend espera String
+                    hourlyRate = hourlyRate.ifBlank { null },
                     teachingExp = teachingExp.ifBlank { null },
                     aboutMe = aboutMe.ifBlank { null },
                     references = references.ifBlank { null },
@@ -146,9 +146,7 @@ fun MentorDetailsScreen(
     }
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Helper de entrada rotulado                                                */
-/* -------------------------------------------------------------------------- */
+
 @Composable
 private fun LabeledField(
     label: String,

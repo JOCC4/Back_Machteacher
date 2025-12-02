@@ -16,33 +16,32 @@ interface BookingApi {
     suspend fun deleteSession(@Path("id") id: Long): Response<Unit>
 }
 
-// ---------- Request/Response models (alineados al backend) ----------
-// POST body (equivalente a SessionCreateRequest del backend)
+
 data class SessionRequest(
     val mentorId: Long,
-    val studentId: Long?,          // ⚠️ el backend lo ignora y toma del token; puedes enviar null
+    val studentId: Long?,
     val subjectId: Long,
-    val packageTypeId: Long?,      // null si sesión individual
-    val date: String,              // "yyyy-MM-dd"
-    val startTime: String,         // "HH:mm"
-    val durationMinutes: Int,      // 60, 90, 120, etc.
-    val modality: String,          // "ONLINE" | "PRESENCIAL" (uppercase)
-    val notes: String?,            // null si vacío
+    val packageTypeId: Long?,
+    val date: String,
+    val startTime: String,
+    val durationMinutes: Int,
+    val modality: String,
+    val notes: String?,
     val priceUsd: Double
 )
 
-// Respuesta (equivalente a SessionDTO del backend)
+
 data class SessionDto(
     val id: Long,
     val studentId: Long,
     val mentorId: Long,
     val subjectId: Long,
     val packageTypeId: Long?,
-    val date: String,              // "yyyy-MM-dd"
-    val startTime: String,         // "HH:mm"
+    val date: String,
+    val startTime: String,
     val durationMinutes: Int,
-    val modality: String,          // "ONLINE" | "PRESENCIAL"
-    val status: String,            // "SCHEDULED", etc.
+    val modality: String,
+    val status: String,
     val priceUsd: Double,
     val notes: String?
 )

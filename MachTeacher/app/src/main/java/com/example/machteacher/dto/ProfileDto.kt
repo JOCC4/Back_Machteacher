@@ -1,6 +1,6 @@
 package com.example.machteacher.dto
 
-// El backend envía todo como Strings, el frontend se encarga de convertir
+
 data class ProfileDto(
     val id: Long?,
     val name: String? = null,
@@ -15,8 +15,8 @@ data class ProfileDto(
     val semester: String? = null,
 
     // Mentor extras
-    val subjects: String? = null, // CSV: "Programación,Algoritmos,...
-    val hourlyRate: String? = null, // Se recibe como String
+    val subjects: String? = null,
+    val hourlyRate: String? = null,
     val teachingExperience: String? = null,
     val aboutMe: String? = null,
     val references: String? = null

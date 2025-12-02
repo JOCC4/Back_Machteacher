@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/repository/SosRepository.kt
 package com.example.machteacher.repository
 
 import com.example.machteacher.dto.SosResponseDto

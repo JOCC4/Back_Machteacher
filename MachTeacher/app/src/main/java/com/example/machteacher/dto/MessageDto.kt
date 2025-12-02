@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/dto/MessageDto.kt
 package com.example.machteacher.dto
 
 data class MessageDto(

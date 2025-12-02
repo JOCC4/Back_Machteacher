@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/ui/chat/ChatUiState.kt
 package com.example.machteacher.ui.chat
 
 import com.example.machteacher.model.ChatMessage

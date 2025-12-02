@@ -56,7 +56,7 @@ fun BookingScreen(
         }
     }
 
-    // Tabs: 0 Detalles, 1 Carrito
+
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
@@ -403,7 +403,7 @@ fun BookingScreen(
 
                             Spacer(Modifier.height(16.dp))
 
-                            // ▶ Este botón SOLO llena el carrito y cambia de tab
+
                             Button(
                                 onClick = {
                                     viewModel.addToCart()
@@ -766,7 +766,7 @@ private fun ModeChip(
     ) { Text(title, color = fg, style = MaterialTheme.typography.bodyMedium) }
 }
 
-/** Clickable sin ripple */
+
 private fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier = composed {
     val interaction = remember { MutableInteractionSource() }
     clickable(interactionSource = interaction, indication = null, onClick = onClick)

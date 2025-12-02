@@ -9,14 +9,14 @@ class LoginUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(email: String, password: String): Result<Boolean> {
         return try {
-            // ✅ Crea el objeto LoginRequest como espera el backend
+
             val request = LoginRequest(email = email, password = password)
             val response = repository.login(request)
 
-            // ✅ Si no hay excepción, devolvemos success
+
             Result.success(true)
         } catch (e: Exception) {
-            // ✅ Manejo limpio de errores
+
             Result.failure(e)
         }
     }

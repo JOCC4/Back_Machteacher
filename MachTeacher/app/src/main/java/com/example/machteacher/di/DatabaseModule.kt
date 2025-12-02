@@ -2,9 +2,9 @@ package com.example.machteacher.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.machteacher.db.AppDatabase // ✅ CORREGIDO: el paquete real es 'db', no 'storage'
+import com.example.machteacher.db.AppDatabase
 import com.example.machteacher.dao.SessionDao
-import com.example.machteacher.dao.MessageDao // ✅ opcional, si también lo usas
+import com.example.machteacher.dao.MessageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,13 +28,13 @@ object DatabaseModule {
             .build()
     }
 
-    // ✅ DAO de sesiones
+    // DAO de sesiones
     @Provides
     fun provideSessionDao(database: AppDatabase): SessionDao {
         return database.sessionDao()
     }
 
-    // ✅ (Opcional) DAO de mensajes si lo necesitas en Chat o ConversationScreen
+
     @Provides
     fun provideMessageDao(database: AppDatabase): MessageDao {
         return database.messageDao()

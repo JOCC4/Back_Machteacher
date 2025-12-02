@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/machteacher/api/MessagingApi.kt
 package com.example.machteacher.api
 
 import com.example.machteacher.dto.ConversationPreviewDto

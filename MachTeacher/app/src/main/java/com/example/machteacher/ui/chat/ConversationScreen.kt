@@ -56,7 +56,7 @@ fun ConversationScreen(
     subject: String = "Programación",
     initials: String = "M",
 
-    // Lista real de mensajes (desde VM/back)
+    // Lista real de mensajes
     messages: List<MessageUi> = emptyList(),
 
     // Callback de envío
@@ -65,14 +65,13 @@ fun ConversationScreen(
     // Navegación atrás
     onBack: () -> Unit = {},
 
-    // ✅ Nuevo: callback que se ejecuta al abrir la conversación
-    // Aquí desde arriba puedes llamar:
-    // { messagesViewModel.onConversationOpened(conversationId, userId) }
+
+
     onOpened: () -> Unit = {}
 ) {
     var input by remember { mutableStateOf("") }
 
-    // ✅ Se ejecuta una sola vez cuando se entra a esta pantalla
+
     LaunchedEffect(Unit) {
         onOpened()
     }

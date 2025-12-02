@@ -35,18 +35,18 @@ interface ProfileApi {
         @Body body: ProfileDto
     ): ProfileDto
 
-    // ---------- Genérico (si lo usas) ----------
+
     @GET("api/profiles/{type}/{userId}")
     suspend fun getProfile(
-        @Path("type") type: String,        // "mentor" | "student"
+        @Path("type") type: String,
         @Path("userId") userId: Long
     ): Response<ProfileDto>
 
-    // ---------- Listado de mentores (con paginación + q opcional) ----------
+
     @GET("api/profiles/mentors")
     suspend fun getMentors(
         @Query("page") page: Int,
         @Query("size") size: Int,
-        @Query("q") q: String? = null   // null => sin filtro server-side
+        @Query("q") q: String? = null
     ): PageResponse<ProfileDto>
 }

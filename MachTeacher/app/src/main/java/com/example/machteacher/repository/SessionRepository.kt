@@ -18,16 +18,11 @@ interface SessionRepository {
         modality: String
     )
 
-    /**
-     * Crea la sesión en el backend y devuelve el ID recién creado.
-     */
     suspend fun createSession(
         request: SessionRequest
     ): Long
 
-    /**
-     * Crea automáticamente la conversación asociada a la sesión recién creada.
-     */
+
     suspend fun startConversation(sessionId: Long): Long
 
     suspend fun deleteSession(id: Long)

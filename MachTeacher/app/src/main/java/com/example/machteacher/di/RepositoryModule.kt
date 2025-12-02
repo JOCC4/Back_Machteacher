@@ -5,7 +5,7 @@ import com.example.machteacher.api.ProfileApi
 import com.example.machteacher.api.SessionApi
 import com.example.machteacher.api.CatalogApi
 import com.example.machteacher.api.MessagingApi
-import com.example.machteacher.api.SosApi                               // ⭐ NUEVO
+import com.example.machteacher.api.SosApi
 
 import com.example.machteacher.dao.SessionDao
 import com.example.machteacher.repository.AuthRepository
@@ -17,8 +17,8 @@ import com.example.machteacher.repository.ProfileRepositoryImpl
 import com.example.machteacher.repository.SessionRepository
 import com.example.machteacher.repository.SessionRepositoryImpl
 
-import com.example.machteacher.repository.SosRepository                    // ⭐ NUEVO
-import com.example.machteacher.repository.SosRepositoryImpl               // ⭐ NUEVO
+import com.example.machteacher.repository.SosRepository
+import com.example.machteacher.repository.SosRepositoryImpl
 
 import com.example.machteacher.storage.AppDataStore
 import dagger.Module
@@ -73,7 +73,7 @@ object RepositoryModule {
     ): MessagingRepository =
         MessagingRepositoryImpl(api)
 
-    // ⭐⭐⭐⭐ NUEVO: REGISTRAR SOS ⭐⭐⭐⭐
+
     @Provides
     @Singleton
     fun provideSosRepository(
